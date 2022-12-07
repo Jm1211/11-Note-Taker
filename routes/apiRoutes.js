@@ -1,0 +1,28 @@
+const path = require('path')
+const fs = require ('fs')
+const router = require('express').Router();
+const {v4: uuid} = require('uuid');
+const db = require('../db/db.json');
+
+router.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, '../db/db.json'));
+  });
+  
+  router.post('/notes', (req, res) => {
+    let save = req.body;
+    save.id = uuidv4();
+    db.push(save);
+    fs.writeFile(path.join(__dirname, '../db/db.json'),
+    JSON.stringify(db),
+    function(err) {
+      if(err) {
+        console.log(err);
+        res.status(500).send('Save Error.')
+      } else {
+        res.json(save)
+      };
+    }
+    );
+  });
+  
+  module.exports = router;
