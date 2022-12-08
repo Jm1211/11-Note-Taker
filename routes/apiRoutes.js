@@ -1,7 +1,7 @@
-const path = require('path')
-const fs = require ('fs')
+const path = require('path');
+const fs = require ('fs');
 const router = require('express').Router();
-const {v4: uuid} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const db = require('../db/db.json');
 
 router.get('/notes', (req, res) => {
